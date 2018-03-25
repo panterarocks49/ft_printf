@@ -13,12 +13,15 @@
 NAME := libftprintf.a
 RM := /bin/rm -f
 
-FLAGS := -Wall -Wextra -Werror
+#FLAGS := -Wall -Wextra -Werror
 INCLUDE := -I ./include/
 
-#PRF_HND :=
+PRF_HND := char str ptr percent
+PRF_MAIN := ft_printf parse_arg handle_arg buffer
 
-LFT_PRF := ft_printf
+PRF_FUNCTS := $(PRF_MAIN) $(patsubst %, handlers/%, $(PRF_HND))
+
+LFT_PRF := $(PRF_MAIN) $(PRF_HND)
 LFT_MEM := ft_memset ft_bzero ft_memcpy ft_memccpy ft_memmove ft_memchr ft_memcmp ft_memalloc ft_memdel
 LFT_STR := ft_strlen ft_strdup ft_strcpy ft_strncpy ft_strcat ft_strncat ft_strlcat ft_strchr ft_strrchr \
 		ft_strstr ft_strnstr ft_strcmp ft_strncmp ft_atoi ft_countwords ft_wordlen ft_tabledel ft_strnew \
@@ -34,7 +37,7 @@ FILES := $(LFT_MEM) $(LFT_STR) $(LFT_CHAR) $(LFT_PUT) $(LFT_LST) $(LFT_READ) $(L
 FUNCTS := $(patsubst %, mem/%, $(LFT_MEM)) $(patsubst %, str/%, $(LFT_STR)) \
 $(patsubst %, char/%, $(LFT_CHAR)) $(patsubst %, put/%, $(LFT_PUT)) \
 $(patsubst %, list/%, $(LFT_LST)) $(patsubst %, read/%, $(LFT_READ)) \
-$(patsubst %, ft_printf/%, $(LFT_PRF))
+$(patsubst %, ft_printf/%, $(PRF_FUNCTS))
 
 CFILES := $(patsubst %, ./src/%.c, $(FUNCTS))
 OFILES := $(patsubst %, %.o, $(FILES))
@@ -44,7 +47,7 @@ OFILES := $(patsubst %, %.o, $(FILES))
 all: $(NAME)
 
 $(OFILES):
-	@gcc $(FLAGS) $(INCLUDE) -c $(CFILES)
+	@gcc  $(INCLUDE) -c $(CFILES)
 
 $(NAME): $(OFILES)
 	@ar rc $(NAME) $(OFILES)
