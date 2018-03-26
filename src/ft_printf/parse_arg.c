@@ -44,11 +44,19 @@ static const char	*parse_min_width(const char *format, t_param *param)
 static const char	*parse_max_width(const char *format, t_param *param)
 {
 	param->max_width = -1;
-	if (*format == '.' && ft_strchr("0123456789", *(format + 1)))
+	if (*format == '.')
 	{
-		param->max_width = ft_atoi(++format);
-		while (ft_strchr("0123456789", *format))
+		if (ft_strchr("0123456789", *(format + 1)))
+		{
+			param->max_width = ft_atoi(++format);
+			while (ft_strchr("0123456789", *format))
+				format++;
+		}
+		else
+		{
 			format++;
+			param->max_width = 0;
+		}
 	}
 	return (format);
 }
@@ -56,13 +64,19 @@ static const char	*parse_max_width(const char *format, t_param *param)
 static const char	*parse_length(const char *format, t_param *param)
 {
 	if (*format == 'h' && *(format + 1) == 'h')
+	{
 		param->flags = param->flags | LTH_HH;
+		format++;
+	}
 	else if (*format == 'h')
 		param->flags = param->flags | LTH_H;
+	else if (*format == 'l' && *(format + 1) == 'l')
+	{
+		param->flags = param->flags | LTH_LL;
+		format++;
+	}
 	else if (*format == 'l')
 		param->flags = param->flags | LTH_L;
-	else if (*format == 'l' && *(format + 1) == 'l')
-		param->flags = param->flags | LTH_LL;
 	else if (*format == 'j')
 		param->flags = param->flags | LTH_J;
 	else if (*format == 'z')
@@ -71,7 +85,7 @@ static const char	*parse_length(const char *format, t_param *param)
 		param->flags = param->flags | LTH_T;
 	else
 		return (format);
-	return (parse_length(++format, param));
+	return (++format);
 }
 
 const char			*parse_arg(const char *format, t_param *param)

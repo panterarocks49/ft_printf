@@ -67,4 +67,8 @@ void				handle_perc(t_env *env, t_param *param);
 
 void				handle_ptr(t_env *env, t_param *param);
 
+void				handle_int(t_env *env, t_param *param);
+
+void				handle_uint(t_env *env, t_param *param);
+
 #endif

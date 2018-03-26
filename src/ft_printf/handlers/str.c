@@ -47,6 +47,9 @@ void		handle_str(t_env *env, t_param *param)
 	else
 	{
 		str = va_arg(*env->args, char *);
-		cpy_str(env, param, str);
+		if (str)
+			cpy_str(env, param, str);
+		else
+			cpy_str(env, param, "(null)");
 	}
 }

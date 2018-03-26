@@ -14,13 +14,24 @@
 
 void	handle_char(t_env *env, t_param *param)
 {
+	int		i;
 	int		c;
 
+	i = 1;
 	if (param->conv == 'C' || (param->flags & LTH_L) == LTH_L)
 		;
 	else
 	{
 		c = va_arg(*env->args, int);
-		cpy_char(env, c);
+		if ((param->flags & FLAG_LEFT) == FLAG_LEFT)
+			cpy_char(env, c);
+		else
+		{
+			while (i++ < param->min_width)
+				cpy_char(env, ' ');
+			cpy_char(env, c);
+		}
+		while (i++ < param->min_width)
+			cpy_char(env, ' ');
 	}
 }

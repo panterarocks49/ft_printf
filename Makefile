@@ -16,7 +16,7 @@ RM := /bin/rm -f
 #FLAGS := -Wall -Wextra -Werror
 INCLUDE := -I ./include/
 
-PRF_HND := char str ptr percent
+PRF_HND := char str ptr percent int uint
 PRF_MAIN := ft_printf parse_arg handle_arg buffer
 
 PRF_FUNCTS := $(PRF_MAIN) $(patsubst %, handlers/%, $(PRF_HND))
