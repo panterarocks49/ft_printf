@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdup.c                                        :+:      :+:    :+:   */
+/*   ft_wclen.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/17 14:52:12 by jbrown            #+#    #+#             */
-/*   Updated: 2018/03/17 14:52:21 by jbrown           ###   ########.fr       */
+/*   Created: 2018/03/27 20:51:53 by jbrown            #+#    #+#             */
+/*   Updated: 2018/03/27 20:51:55 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstdup(t_list *lst)
+size_t	ft_wclen(wint_t wt)
 {
-	t_list	*ret;
-	t_list	*lst_ptr;
-
-	ret = NULL;
-	if (lst)
-	{
-		ret = ft_lstnew(lst->content, lst->content_size);
-		lst_ptr = ret;
-		while (lst->next)
-		{
-			lst = lst->next;
-			lst_ptr->next = ft_lstnew(lst->content, lst->content_size);
-			lst_ptr = lst_ptr->next;
-		}
-	}
-	return (ret);
+	if (wt <= 0x007F)
+		return (1);
+	else if (wt <= 0x07FF)
+		return (2);
+	else if (wt <= 0xFFFF)
+		return (3);
+	else if (wt <= 0x10FFFF)
+		return (4);
+	return (0);
 }

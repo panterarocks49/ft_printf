@@ -14,8 +14,9 @@
 
 void	handle_ptr(t_env *env, t_param *param)
 {
-	int t;
+	uintmax_t u;
 
-	t = env->i;
-	t = param->max_width;
+	param->flags = param->flags | FLAG_HASH;
+	u = (uintmax_t)va_arg(*env->args, void *);
+	pf_uitoa_base(env, param, u, 16);
 }

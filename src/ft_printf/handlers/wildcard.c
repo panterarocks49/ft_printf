@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   percent.c                                          :+:      :+:    :+:   */
+/*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/24 14:58:37 by jbrown            #+#    #+#             */
-/*   Updated: 2018/03/24 14:58:39 by jbrown           ###   ########.fr       */
+/*   Created: 2018/03/28 19:10:20 by jbrown            #+#    #+#             */
+/*   Updated: 2018/03/28 19:10:24 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	handle_perc(t_env *env, t_param *param)
+void	handle_max_wld(t_env *env, t_param *param)
 {
-	char	pad;
-	int		i;
+	if ((param->flags & MAX_WIDTH_WLD) == MAX_WIDTH_WLD)
+		param->max_width = va_arg(*env->args, int);
+}
 
-	i = 0;
-	pad = ' ';
-	if ((param->flags & FLAG_ZERO) == FLAG_ZERO)
-		pad = '0';
-	if ((param->flags & FLAG_LEFT) != FLAG_LEFT)
-		while (i++ < param->min_width - 1)
-			cpy_char(env, pad);
-	cpy_char(env, '%');
-	if ((param->flags & FLAG_LEFT) == FLAG_LEFT)
-		while (i++ < param->min_width - 1)
-			cpy_char(env, ' ');
+void	handle_min_wld(t_env *env, t_param *param)
+{
+	int min_width;
+
+	if ((param->flags & MIN_WIDTH_WLD) == MIN_WIDTH_WLD)
+	{
+		min_width = va_arg(*env->args, int);
+		param->min_width = FT_ABS(min_width);
+		if (min_width < 0)
+			param->flags = param->flags | FLAG_LEFT;
+	}
 }

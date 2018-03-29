@@ -12,6 +12,27 @@
 
 #include "ft_printf.h"
 
+static void	handle_arg_2(t_env *env, t_param *param)
+{
+	int						i;
+	static const t_handler	handlers[8] = {
+		{.conv = 'f', .handler = &handle_float},
+		{.conv = 'F', .handler = &handle_float},
+		{.conv = 'e', .handler = &handle_float},
+		{.conv = 'E', .handler = &handle_float},
+		{.conv = 'g', .handler = &handle_float},
+		{.conv = 'G', .handler = &handle_float},
+		{.conv = 'a', .handler = &handle_float},
+		{.conv = 'A', .handler = &handle_float}};
+
+	i = -1;
+	while (++i < 8)
+	{
+		if (handlers[i].conv == param->conv)
+			handlers[i].handler(env, param);
+	}
+}
+
 void	handle_arg(t_env *env, t_param *param)
 {
 	int						i;
@@ -32,10 +53,13 @@ void	handle_arg(t_env *env, t_param *param)
 		{.conv = 'c', .handler = &handle_char},
 		{.conv = 'C', .handler = &handle_char}};
 
+	handle_min_wld(env, param);
+	handle_max_wld(env, param);
 	i = -1;
 	while (++i < 15)
 	{
 		if (handlers[i].conv == param->conv)
 			handlers[i].handler(env, param);
 	}
+	handle_arg_2(env, param);
 }

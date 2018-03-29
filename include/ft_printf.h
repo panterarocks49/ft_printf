@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 # include <stdarg.h>
 # include <libft.h>
+# include <wchar.h>
 # define BUF_SIZE 4096
 # define FLAG_LEFT 1
 # define FLAG_ZERO 2
@@ -27,6 +28,9 @@
 # define LTH_J 512
 # define LTH_Z 1024
 # define LTH_T 2048
+# define LTH_CAPL 4096
+# define MIN_WIDTH_WLD 8192
+# define MAX_WIDTH_WLD 16384
 
 typedef struct		s_env
 {
@@ -52,10 +56,18 @@ typedef struct		s_handler
 
 int					ft_printf(const char *format, ...);
 
+void				pf_itoa(t_env *env, t_param *param, intmax_t d);
+
+void				pf_uitoa_base(t_env *env, t_param *param, uintmax_t u,
+									int base);
+
+void				pf_ftoa_base(t_env *env, t_param *param, long double f, int base);
+
+void				cpy_wchar(t_env *env, wint_t wt);
 void				cpy_char(t_env *env, int c);
 void				flush_buf(t_env *env);
 
-const char			*parse_arg(const char *format, t_param *param);
+int					parse_arg(const char **format, t_param *param);
 
 void				handle_arg(t_env *env, t_param *param);
 
@@ -70,5 +82,10 @@ void				handle_ptr(t_env *env, t_param *param);
 void				handle_int(t_env *env, t_param *param);
 
 void				handle_uint(t_env *env, t_param *param);
+
+void				handle_max_wld(t_env *env, t_param *param);
+void				handle_min_wld(t_env *env, t_param *param);
+
+void				handle_float(t_env *env, t_param *param);
 
 #endif

@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buffer.c                                           :+:      :+:    :+:   */
+/*   float.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/24 14:44:58 by jbrown            #+#    #+#             */
-/*   Updated: 2018/03/24 14:44:59 by jbrown           ###   ########.fr       */
+/*   Created: 2018/03/28 15:46:51 by jbrown            #+#    #+#             */
+/*   Updated: 2018/03/28 15:46:53 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	cpy_char(t_env *env, int c)
+void		handle_float(t_env *env, t_param *param)
 {
-	if (env->i >= BUF_SIZE)
-		flush_buf(env);
-	env->buf[env->i++] = (char)c;
-}
+	long double f;
 
-void	flush_buf(t_env *env)
-{
-	env->bytes += write(1, env->buf, env->i);
-	env->i = 0;
+	if ((param->flags & LTH_CAPL) == LTH_CAPL)
+		f = va_arg(*env->args, long double);
+	else
+		f = (long double)va_arg(*env->args, double);
+	if (param->conv == 'a' || param->conv == 'A')
+		pf_ftoa_base(env, param, f, 16);
+	else
+		pf_ftoa_base(env, param, f, 10);
 }

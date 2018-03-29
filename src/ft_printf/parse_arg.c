@@ -38,6 +38,11 @@ static const char	*parse_min_width(const char *format, t_param *param)
 		while (ft_strchr("0123456789", *format))
 			format++;
 	}
+	else if (*format == '*')
+	{
+		param->flags = param->flags | MIN_WIDTH_WLD;
+		format++;
+	}
 	return (format);
 }
 
@@ -46,17 +51,20 @@ static const char	*parse_max_width(const char *format, t_param *param)
 	param->max_width = -1;
 	if (*format == '.')
 	{
-		if (ft_strchr("0123456789", *(format + 1)))
+		format++;
+		if (ft_strchr("0123456789", *format))
 		{
-			param->max_width = ft_atoi(++format);
+			param->max_width = ft_atoi(format);
 			while (ft_strchr("0123456789", *format))
 				format++;
 		}
-		else
+		else if (*format == '*')
 		{
+			param->flags = param->flags | MAX_WIDTH_WLD;
 			format++;
-			param->max_width = 0;
 		}
+		else 
+			param->max_width = 0;
 	}
 	return (format);
 }
@@ -83,30 +91,36 @@ static const char	*parse_length(const char *format, t_param *param)
 		param->flags = param->flags | LTH_Z;
 	else if (*format == 't')
 		param->flags = param->flags | LTH_T;
+	else if (*format == 'L')
+		param->flags = param->flags | LTH_CAPL;
 	else
 		return (format);
 	return (++format);
 }
 
-const char			*parse_arg(const char *format, t_param *param)
+int					parse_arg(const char **format, t_param *param)
 {
 	param->flags = 0;
-	if ((format = parse_flags(format, param)))
+	if ((*format = parse_flags(*format, param)))
 	{
-		if ((format = parse_min_width(format, param)))
+		if ((*format = parse_min_width(*format, param)))
 		{
-			if ((format = parse_max_width(format, param)))
+			if ((*format = parse_max_width(*format, param)))
 			{
-				if ((format = parse_length(format, param)))
+				if ((*format = parse_length(*format, param)))
 				{
-					if (ft_strchr("%sSpdDioOuUxXcC", *format))
+					if (ft_strchr("%sSpdDioOuUxXcCfFeEgGaA", **format))
 					{
-						param->conv = *format++;
-						return (format);
+						param->conv = **format;
+						(*format)++;
+						return (1);
 					}
 				}
 			}
 		}
 	}
-	return (NULL);
+	while (**format &&
+		ft_strchr("%sSpdDioOuUxXcCfFeEgGaAhljzt0123456789#-+*", **format))
+		(*format)++;
+	return (0);
 }

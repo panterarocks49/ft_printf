@@ -12,30 +12,6 @@
 
 #include "ft_printf.h"
 
-/*static const char	*skip_arg(const char *format)
-{
-	const char *flags = "%#0-+ ";
-	const char *numbers = "0123456789";
-	const char *convs = "sSpdDioOuUxXcC";
-	int i;
-
-	i = 0;
-	while (ft_strchr(flags, *format))
-		format++;
-	while (ft_strchr(numbers, *format))
-		format++;
-	if (*format == '.')
-		format++;
-	while (ft_strchr(numbers, *format))
-		format++;
-	if (ft_strchr(convs, *format))
-		format++;
-	return (format);
-}*/
-
-// all functions will return number of bytes printed
-// also will write to buffer
-
 static void		set_env(t_env *env, va_list *args)
 {
 	ft_bzero(env->buf, BUF_SIZE);
@@ -56,10 +32,9 @@ static int		ft_printf_va(const char *format, va_list *args)
 			flush_buf(&env);
 		if (*format == '%')
 		{
-			if ((format = parse_arg(++format, &param)))
+			format++;
+			if (parse_arg(&format, &param))
 				handle_arg(&env, &param);
-			else
-				return (-1);
 		}
 		else
 			env.buf[env.i++] = *format++;
@@ -68,7 +43,7 @@ static int		ft_printf_va(const char *format, va_list *args)
 	return (env.bytes);
 }
 
-int			ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		bytes;

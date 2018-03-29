@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <wchar.h>
 
 # define FT_ABS(x) (((x) < 0) ? -(x) : (x))
 # define FT_MIN(a, b) (((a) < (b)) ? (a) : (b))
@@ -98,5 +99,8 @@ int					ft_lstsize(t_list *lst);
 t_list				*ft_lstat(t_list *lst, unsigned int n);
 void				ft_lstrev(t_list **alst);
 char				**ft_tabledel(char **ret, int len);
+
+size_t				ft_wclen(wint_t wt);
+size_t				ft_wstrlen(wchar_t *wstr);
 
 #endif
