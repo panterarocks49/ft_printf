@@ -37,4 +37,6 @@ void		handle_uint(t_env *env, t_param *param)
 		pf_uitoa_base(env, param, u, 8);
 	else if (param->conv == 'x' || param->conv == 'X')
 		pf_uitoa_base(env, param, u, 16);
+	else if (param->conv == 'b' || param->conv == 'B')
+		pf_uitoa_base(env, param, u, 2);
 }

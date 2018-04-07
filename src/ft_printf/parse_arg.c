@@ -109,7 +109,7 @@ int					parse_arg(const char **format, t_param *param)
 			{
 				if ((*format = parse_length(*format, param)))
 				{
-					if (ft_strchr("%sSpdDioOuUxXcCfFeEgGaA", **format))
+					if (ft_strchr("%sSpdDioOuUxXcCfFbB", **format))
 					{
 						param->conv = **format;
 						(*format)++;
@@ -120,7 +120,7 @@ int					parse_arg(const char **format, t_param *param)
 		}
 	}
 	while (**format &&
-		ft_strchr("%sSpdDioOuUxXcCfFeEgGaAhljzt0123456789#-+*", **format))
+		ft_strchr("%sSpdDioOuUxXcCfFeEgGaAbBhljzt0123456789#-+*", **format))
 		(*format)++;
 	return (0);
 }

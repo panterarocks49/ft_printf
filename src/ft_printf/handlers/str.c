@@ -54,7 +54,12 @@ static void	cpy_wstr(t_env *env, t_param *param, wchar_t *wstr)
 	if ((param->flags & FLAG_ZERO) == FLAG_ZERO)
 		pad = '0';
 	if (param->max_width > -1 && param->max_width < len)
-		len = param->max_width;
+	{
+		len = 0;
+		while (len + ft_wclen(wstr[i]) <= param->max_width)
+			len += ft_wclen(wstr[i++]);
+		i = 0;
+	}
 	if ((param->flags & FLAG_LEFT) != FLAG_LEFT)
 	{
 		while (i++ < param->min_width - len)

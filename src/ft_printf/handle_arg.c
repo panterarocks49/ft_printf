@@ -18,12 +18,8 @@ static void	handle_arg_2(t_env *env, t_param *param)
 	static const t_handler	handlers[8] = {
 		{.conv = 'f', .handler = &handle_float},
 		{.conv = 'F', .handler = &handle_float},
-		{.conv = 'e', .handler = &handle_float},
-		{.conv = 'E', .handler = &handle_float},
-		{.conv = 'g', .handler = &handle_float},
-		{.conv = 'G', .handler = &handle_float},
-		{.conv = 'a', .handler = &handle_float},
-		{.conv = 'A', .handler = &handle_float}};
+		{.conv = 'b', .handler = &handle_uint},
+		{.conv = 'B', .handler = &handle_uint}};
 
 	i = -1;
 	while (++i < 8)
