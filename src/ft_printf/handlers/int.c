@@ -29,7 +29,7 @@ void		handle_int(t_env *env, t_param *param)
 	else if ((param->flags & LTH_J) == LTH_J)
 		d = va_arg(*env->args, intmax_t);
 	else if ((param->flags & LTH_Z) == LTH_Z)
-		d = (intmax_t)((size_t)va_arg(*env->args, intmax_t));
+		d = (intmax_t)((ssize_t)va_arg(*env->args, intmax_t));
 	else
 		d = (intmax_t)va_arg(*env->args, int);
 	pf_itoa(env, param, d);

@@ -13,11 +13,11 @@
 NAME := libftprintf.a
 RM := /bin/rm -f
 
-#FLAGS := -Wall -Wextra -Werror
+FLAGS := -Wall -Wextra -Werror
 INCLUDE := -I ./include/
 
 PRF_UTIL := buffer pf_itoa pf_uitoa_base pf_ftoa_base
-PRF_HND := char str ptr percent int uint float wildcard
+PRF_HND := char str ptr percent int uint float wildcard int_ptr
 PRF_MAIN := ft_printf parse_arg handle_arg
 
 PRF_FUNCTS := $(PRF_MAIN) $(patsubst %, handlers/%, $(PRF_HND)) $(patsubst %, util/%, $(PRF_UTIL))
@@ -49,7 +49,7 @@ OFILES := $(patsubst %, %.o, $(FILES))
 all: $(NAME)
 
 $(OFILES):
-	@gcc  $(INCLUDE) -c $(CFILES)
+	@gcc $(FLAGS) $(INCLUDE) -c $(CFILES)
 
 $(NAME): $(OFILES)
 	@ar rc $(NAME) $(OFILES)

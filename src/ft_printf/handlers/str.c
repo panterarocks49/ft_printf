@@ -56,7 +56,7 @@ static void	cpy_wstr(t_env *env, t_param *param, wchar_t *wstr)
 	if (param->max_width > -1 && param->max_width < len)
 	{
 		len = 0;
-		while (len + ft_wclen(wstr[i]) <= param->max_width)
+		while ((int)(len + ft_wclen(wstr[i])) <= param->max_width)
 			len += ft_wclen(wstr[i++]);
 		i = 0;
 	}

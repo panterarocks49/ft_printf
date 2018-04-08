@@ -34,24 +34,24 @@
 
 typedef struct		s_env
 {
-	va_list			*args;
-	char			buf[BUF_SIZE];
-	int				i;
-	size_t			bytes;
+	va_list		*args;
+	char		buf[BUF_SIZE];
+	int			i;
+	size_t		bytes;
 }					t_env;
 
 typedef struct		s_param
 {
-	int				flags;
-	int				max_width;
-	int				min_width;
-	char			conv;
+	int			flags;
+	int			max_width;
+	int			min_width;
+	char		conv;
 }					t_param;
 
 typedef struct		s_handler
 {
-	char			conv;
-	void			(*handler)(t_env *, t_param *);
+	char		conv;
+	void		(*handler)(t_env *, t_param *);
 }					t_handler;
 
 int					ft_printf(const char *format, ...);
@@ -85,6 +85,8 @@ void				handle_uint(t_env *env, t_param *param);
 
 void				handle_max_wld(t_env *env, t_param *param);
 void				handle_min_wld(t_env *env, t_param *param);
+
+void				handle_int_ptr(t_env *env, t_param *param);
 
 void				handle_float(t_env *env, t_param *param);
 

@@ -49,7 +49,8 @@ static int	uintmax_prefix(t_param *param, uintmax_t u)
 			sign = 1;
 		else if (param->conv == 'p')
 			sign = 2;
-		else if (u && (param->conv == 'x' || param->conv == 'X'))
+		else if (u && (param->conv == 'x' || param->conv == 'X'
+			|| param->conv == 'b' || param->conv == 'B'))
 			sign = 2;
 	}
 	return (sign);
@@ -68,7 +69,11 @@ static void	cpy_sign_pad(t_env *env, t_param *param, int i, int sign)
 			env->buf[i--] = 'x';
 		else if (param->conv == 'X')
 			env->buf[i--] = 'X';
-		if (ft_strchr("oOxXp", param->conv))
+		else if (param->conv == 'b')
+			env->buf[i--] = 'b';
+		else if (param->conv == 'B')
+			env->buf[i--] = 'B';
+		if (ft_strchr("oOxXpbB", param->conv))
 			env->buf[i--] = '0';
 	}
 	while (i > env->i - 1)
