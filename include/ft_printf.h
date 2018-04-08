@@ -31,6 +31,7 @@
 # define LTH_CAPL 4096
 # define MIN_WIDTH_WLD 8192
 # define MAX_WIDTH_WLD 16384
+# define MDF_W 32768
 
 typedef struct		s_env
 {
