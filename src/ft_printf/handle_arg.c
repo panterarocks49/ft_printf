@@ -19,7 +19,8 @@ static void	handle_arg_2(t_env *env, t_param *param)
 		{.conv = 'f', .handler = &handle_float},
 		{.conv = 'F', .handler = &handle_float},
 		{.conv = 'b', .handler = &handle_uint},
-		{.conv = 'B', .handler = &handle_uint}};
+		{.conv = 'B', .handler = &handle_uint},
+		{.conv = 'n', .handler = &handle_int_ptr}};
 
 	i = -1;
 	while (++i < 8)
