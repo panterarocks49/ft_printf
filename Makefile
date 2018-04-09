@@ -16,7 +16,7 @@ RM := /bin/rm -f
 FLAGS := -Wall -Wextra -Werror
 INCLUDE := -I ./include/
 
-PRF_UTIL := buffer pf_itoa pf_uitoa_base pf_ftoa_base
+PRF_UTIL := buffer pf_itoa pf_uitoa_base pf_ftoa
 PRF_HND := char str ptr percent int uint float wildcard int_ptr
 PRF_MAIN := ft_printf parse_arg handle_arg
 

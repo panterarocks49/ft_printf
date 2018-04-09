@@ -40,7 +40,16 @@ static char	intmax_sign(t_param *param, intmax_t d)
 	return (sign);
 }
 
-static int	calc_width(t_env *env, t_param *param, int size, int sign)
+static void	cpy_pad(t_env *env, char sign, int i, int width)
+{
+	if (sign && i >= env->i - 1 + !(!sign))
+		env->buf[i--] = sign;
+	while (i > env->i - 1)
+		env->buf[i--] = ' ';
+	env->i += width;
+}
+
+int			calc_width(t_env *env, t_param *param, int size, int sign)
 {
 	int	width;
 
@@ -50,15 +59,6 @@ static int	calc_width(t_env *env, t_param *param, int size, int sign)
 	if (width + env->i >= BUF_SIZE)
 		flush_buf(env);
 	return (width);
-}
-
-static void	cpy_pad(t_env *env, char sign, int i, int width)
-{
-	if (sign && i >= env->i - 1 + !(!sign))
-		env->buf[i--] = sign;
-	while (i > env->i - 1)
-		env->buf[i--] = ' ';
-	env->i += width;
 }
 
 void		pf_itoa(t_env *env, t_param *param, intmax_t d)

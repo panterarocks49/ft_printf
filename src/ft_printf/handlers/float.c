@@ -20,8 +20,6 @@ void		handle_float(t_env *env, t_param *param)
 		f = va_arg(*env->args, long double);
 	else
 		f = (long double)va_arg(*env->args, double);
-	if (param->conv == 'a' || param->conv == 'A')
-		pf_ftoa_base(env, param, f, 16);
-	else
-		pf_ftoa_base(env, param, f, 10);
+	if (param->conv == 'f' || param->conv == 'F')
+		pf_ftoa(env, param, f);
 }

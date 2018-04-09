@@ -58,12 +58,13 @@ typedef struct		s_handler
 int					ft_printf(const char *format, ...);
 
 void				pf_itoa(t_env *env, t_param *param, intmax_t d);
+int					calc_width(t_env *env, t_param *param, int size, int sign);
+
 
 void				pf_uitoa_base(t_env *env, t_param *param, uintmax_t u,
 									int base);
 
-void				pf_ftoa_base(t_env *env, t_param *param, long double f
-	, int base);
+void				pf_ftoa(t_env *env, t_param *param, long double f);
 
 void				cpy_wchar(t_env *env, wint_t wt);
 void				cpy_char(t_env *env, int c);
