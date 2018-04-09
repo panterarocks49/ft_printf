@@ -16,20 +16,22 @@ static void	print_wchar(t_env *env, t_param *param, wint_t wt)
 {
 	char	pad;
 	int		i;
+	int		width;
 
 	i = 1;
 	pad = ' ';
+	width = param->min_width - ft_wclen(wt);
 	if ((param->flags & FLAG_ZERO) == FLAG_ZERO)
 		pad = '0';
 	if ((param->flags & FLAG_LEFT) == FLAG_LEFT)
 		cpy_wchar(env, wt);
 	else
 	{
-		while (i++ < param->min_width)
+		while (i++ <= width)
 			cpy_char(env, pad);
 		cpy_wchar(env, wt);
 	}
-	while (i++ < param->min_width)
+	while (i++ <= width)
 		cpy_char(env, ' ');
 }
 
@@ -59,8 +61,7 @@ void		handle_char(t_env *env, t_param *param)
 	wint_t	wt;
 	int		c;
 
-	if ((param->conv == 'C' || (param->flags & LTH_L) == LTH_L)
-		&& (param->flags & MDF_W) == MDF_W)
+	if ((param->flags & MDF_W) == MDF_W)
 	{
 		wt = va_arg(*env->args, wint_t);
 		print_wchar(env, param, wt);

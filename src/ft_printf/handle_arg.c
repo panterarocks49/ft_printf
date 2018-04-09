@@ -15,7 +15,11 @@
 static void	handle_arg_2(t_env *env, t_param *param)
 {
 	int						i;
-	static const t_handler	handlers[8] = {
+	static const t_handler	handlers[9] = {
+		{.conv = 's', .handler = &handle_str},
+		{.conv = 'S', .handler = &handle_str},
+		{.conv = 'c', .handler = &handle_char},
+		{.conv = 'C', .handler = &handle_char},
 		{.conv = 'f', .handler = &handle_float},
 		{.conv = 'F', .handler = &handle_float},
 		{.conv = 'b', .handler = &handle_uint},
@@ -23,20 +27,18 @@ static void	handle_arg_2(t_env *env, t_param *param)
 		{.conv = 'n', .handler = &handle_int_ptr}};
 
 	i = -1;
-	while (++i < 8)
+	while (++i < 9)
 	{
 		if (handlers[i].conv == param->conv)
 			handlers[i].handler(env, param);
 	}
 }
 
-void	handle_arg(t_env *env, t_param *param)
+void		handle_arg(t_env *env, t_param *param)
 {
 	int						i;
-	static const t_handler	handlers[15] = {
+	static const t_handler	handlers[11] = {
 		{.conv = '%', .handler = handle_perc},
-		{.conv = 's', .handler = &handle_str},
-		{.conv = 'S', .handler = &handle_str},
 		{.conv = 'p', .handler = &handle_ptr},
 		{.conv = 'd', .handler = &handle_int},
 		{.conv = 'D', .handler = &handle_int},
@@ -46,14 +48,12 @@ void	handle_arg(t_env *env, t_param *param)
 		{.conv = 'u', .handler = &handle_uint},
 		{.conv = 'U', .handler = &handle_uint},
 		{.conv = 'x', .handler = &handle_uint},
-		{.conv = 'X', .handler = &handle_uint},
-		{.conv = 'c', .handler = &handle_char},
-		{.conv = 'C', .handler = &handle_char}};
+		{.conv = 'X', .handler = &handle_uint}};
 
 	handle_min_wld(env, param);
 	handle_max_wld(env, param);
 	i = -1;
-	while (++i < 15)
+	while (++i < 11)
 	{
 		if (handlers[i].conv == param->conv)
 			handlers[i].handler(env, param);

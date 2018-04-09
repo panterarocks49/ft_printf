@@ -32,14 +32,26 @@ static void	cpy_str(t_env *env, t_param *param, char *str)
 		i = 0;
 	}
 	while (i < length)
-	{
 		cpy_char(env, str[i++]);
-	}
 	if ((param->flags & FLAG_LEFT) == FLAG_LEFT)
-	{
 		while (i++ < param->min_width)
 			cpy_char(env, ' ');
+}
+
+static int	pf_wstrlen(t_param *param, wchar_t *wstr)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	len = ft_wstrlen(wstr);
+	if (param->max_width > -1 && param->max_width < len)
+	{
+		len = 0;
+		while ((int)(len + ft_wclen(wstr[i])) <= param->max_width)
+			len += ft_wclen(wstr[i++]);
 	}
+	return (len);
 }
 
 static void	cpy_wstr(t_env *env, t_param *param, wchar_t *wstr)
@@ -49,17 +61,10 @@ static void	cpy_wstr(t_env *env, t_param *param, wchar_t *wstr)
 	int		len;
 
 	i = 0;
-	len = ft_wstrlen(wstr);
+	len = pf_wstrlen(param, wstr);
 	pad = ' ';
 	if ((param->flags & FLAG_ZERO) == FLAG_ZERO)
 		pad = '0';
-	if (param->max_width > -1 && param->max_width < len)
-	{
-		len = 0;
-		while ((int)(len + ft_wclen(wstr[i])) <= param->max_width)
-			len += ft_wclen(wstr[i++]);
-		i = 0;
-	}
 	if ((param->flags & FLAG_LEFT) != FLAG_LEFT)
 	{
 		while (i++ < param->min_width - len)
@@ -78,7 +83,8 @@ void		handle_str(t_env *env, t_param *param)
 	wchar_t	*wstr;
 	char	*str;
 
-	if (param->conv == 'S' || (param->flags & LTH_L) == LTH_L)
+	if (param->conv == 'S' || (param->flags & LTH_L) == LTH_L
+		|| (param->flags & MDF_W) == MDF_W)
 	{
 		wstr = va_arg(*env->args, wchar_t *);
 		if (wstr)

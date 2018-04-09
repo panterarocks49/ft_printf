@@ -63,7 +63,7 @@ static const char	*parse_max_width(const char *format, t_param *param)
 			param->flags = param->flags | MAX_WIDTH_WLD;
 			format++;
 		}
-		else 
+		else
 			param->max_width = 0;
 	}
 	return (format);
@@ -72,17 +72,11 @@ static const char	*parse_max_width(const char *format, t_param *param)
 static const char	*parse_length(const char *format, t_param *param)
 {
 	if (*format == 'h' && *(format + 1) == 'h')
-	{
 		param->flags = param->flags | LTH_HH;
-		format++;
-	}
 	else if (*format == 'h')
 		param->flags = param->flags | LTH_H;
 	else if (*format == 'l' && *(format + 1) == 'l')
-	{
 		param->flags = param->flags | LTH_LL;
-		format++;
-	}
 	else if (*format == 'l')
 		param->flags = param->flags | LTH_L;
 	else if (*format == 'j')
@@ -93,8 +87,12 @@ static const char	*parse_length(const char *format, t_param *param)
 		param->flags = param->flags | LTH_T;
 	else if (*format == 'L')
 		param->flags = param->flags | LTH_CAPL;
+	else if (*format == 'w')
+		param->flags = param->flags | MDF_W;
 	else
 		return (format);
+	if (*(format + 1) == 'l' || *(format + 1) == 'h')
+		++format;
 	return (++format);
 }
 
@@ -120,7 +118,7 @@ int					parse_arg(const char **format, t_param *param)
 		}
 	}
 	while (**format &&
-		ft_strchr("%sSpdDioOuUxXcCfFeEgGaAbBnhljzt0123456789#-+*", **format))
+		ft_strchr("%sSpdDioOuUxXcCfFeEgGaAbBnhljztLw0123456789#-+*", **format))
 		(*format)++;
 	return (0);
 }
