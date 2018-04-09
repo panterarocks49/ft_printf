@@ -111,8 +111,6 @@ void		pf_ftoa(t_env *env, t_param *param, long double f)
 	int			width;
 
 	size = pf_f_size(param, f);
-	ft_putnbr(size);
-	ft_putchar('\n');
 	sign = pf_f_sign(param, f);
 	width = calc_width(env, param, size, !(!sign));
 	i = env->i + width - 1;
