@@ -26,7 +26,7 @@ static int	intmax_size(t_param *param, intmax_t d)
 	return (size);
 }
 
-static char	intmax_sign(t_param *param, intmax_t d)
+char		intmax_sign(t_param *param, intmax_t d)
 {
 	char	sign;
 

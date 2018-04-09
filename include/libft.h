@@ -103,4 +103,6 @@ char				**ft_tabledel(char **ret, int len);
 size_t				ft_wclen(wint_t wt);
 size_t				ft_wstrlen(wchar_t *wstr);
 
+int					ft_pow(int base, int pow);
+
 #endif

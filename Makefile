@@ -33,12 +33,13 @@ LFT_WCHAR := ft_wclen ft_wstrlen
 LFT_PUT := ft_putchar ft_putstr ft_putendl ft_putnbr ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd
 LFT_LST := ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap ft_lstappend ft_lstsize ft_lstat ft_lstrev ft_lstdup
 LFT_READ := get_next_line
+LFT_MATH := ft_pow
 
-FILES := $(LFT_MEM) $(LFT_STR) $(LFT_CHAR) $(LFT_WCHAR) $(LFT_PUT) $(LFT_LST) $(LFT_READ) $(LFT_PRF)
+FILES := $(LFT_MEM) $(LFT_STR) $(LFT_CHAR) $(LFT_WCHAR) $(LFT_PUT) $(LFT_LST) $(LFT_READ) $(LFT_MATH) $(LFT_PRF)
 
 FUNCTS := $(patsubst %, mem/%, $(LFT_MEM)) $(patsubst %, str/%, $(LFT_STR)) \
 $(patsubst %, char/%, $(LFT_CHAR)) $(patsubst %, wchar/%, $(LFT_WCHAR)) $(patsubst %, put/%, $(LFT_PUT)) \
-$(patsubst %, list/%, $(LFT_LST)) $(patsubst %, read/%, $(LFT_READ)) \
+$(patsubst %, list/%, $(LFT_LST)) $(patsubst %, read/%, $(LFT_READ)) $(patsubst %, math/%, $(LFT_MATH)) \
 $(patsubst %, ft_printf/%, $(PRF_FUNCTS))
 
 CFILES := $(patsubst %, ./src/%.c, $(FUNCTS))

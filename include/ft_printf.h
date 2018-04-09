@@ -59,7 +59,7 @@ int					ft_printf(const char *format, ...);
 
 void				pf_itoa(t_env *env, t_param *param, intmax_t d);
 int					calc_width(t_env *env, t_param *param, int size, int sign);
-
+char				intmax_sign(t_param *param, intmax_t d);
 
 void				pf_uitoa_base(t_env *env, t_param *param, uintmax_t u,
 									int base);
