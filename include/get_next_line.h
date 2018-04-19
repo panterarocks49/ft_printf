@@ -6,7 +6,7 @@
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 16:27:25 by jbrown            #+#    #+#             */
-/*   Updated: 2018/03/06 12:03:59 by jbrown           ###   ########.fr       */
+/*   Updated: 2018/04/18 18:22:45 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,5 @@ typedef struct	s_file
 	int		fd;
 	char	*buf;
 }				t_file;
-
-int				get_next_line(const int fd, char **line);
 
 #endif

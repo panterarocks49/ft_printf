@@ -6,7 +6,7 @@
 #    By: jbrown <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 15:42:35 by jbrown            #+#    #+#              #
-#    Updated: 2018/03/06 12:02:56 by jbrown           ###   ########.fr        #
+#    Updated: 2018/04/18 18:24:31 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,11 +50,11 @@ OFILES := $(patsubst %, %.o, $(FILES))
 all: $(NAME)
 
 $(OFILES):
-	@gcc $(FLAGS) $(INCLUDE) -c $(CFILES)
+	gcc $(FLAGS) $(INCLUDE) -c $(CFILES)
 
 $(NAME): $(OFILES)
-	@ar rc $(NAME) $(OFILES)
-	@ranlib $(NAME)
+	ar rc $(NAME) $(OFILES)
+	ranlib $(NAME)
 
 clean:
 	@$(RM) $(OFILES)

@@ -6,7 +6,7 @@
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 20:05:25 by jbrown            #+#    #+#             */
-/*   Updated: 2018/03/18 20:07:13 by jbrown           ###   ########.fr       */
+/*   Updated: 2018/04/18 18:22:28 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ typedef struct		s_handler
 	char		conv;
 	void		(*handler)(t_env *, t_param *);
 }					t_handler;
-
-int					ft_printf(const char *format, ...);
 
 void				pf_itoa(t_env *env, t_param *param, intmax_t d);
 int					calc_width(t_env *env, t_param *param, int size, int sign);

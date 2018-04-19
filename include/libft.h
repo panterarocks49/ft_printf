@@ -6,7 +6,7 @@
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:31:32 by jbrown            #+#    #+#             */
-/*   Updated: 2018/03/06 12:06:41 by jbrown           ###   ########.fr       */
+/*   Updated: 2018/04/18 18:23:01 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,9 @@ size_t				ft_wclen(wint_t wt);
 size_t				ft_wstrlen(wchar_t *wstr);
 
 int					ft_pow(int base, int pow);
+
+int					ft_printf(const char *format, ...);
+
+int					get_next_line(const int fd, char **line);
 
 #endif
