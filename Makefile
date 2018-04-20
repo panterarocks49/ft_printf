@@ -6,7 +6,7 @@
 #    By: jbrown <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 15:42:35 by jbrown            #+#    #+#              #
-#    Updated: 2018/04/20 03:29:09 by jbrown           ###   ########.fr        #
+#    Updated: 2018/04/20 03:34:10 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,24 +60,24 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)math
 	@mkdir -p $(OBJ_DIR)ft_printf/handlers
 	@mkdir -p $(OBJ_DIR)ft_printf/util
-	@echo [INFO] Libprintf Object Files Directory Created
+	@echo [INFO] Libftprintf Object Files Directory Created
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
 
 $(NAME): $(OBJ_DIR) $(OFILES)
 	@ar rc $(NAME) $(OFILES)
-	@echo [INFO] libprintf.a Created
+	@echo [INFO] $(NAME) Created
 	@ranlib $(NAME)
 	@echo [INFO] ranlib $(NAME)
 
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@echo [INFO] Libprintf Object Files Directory Destroyed
+	@echo [INFO] Libftprintf Object Files Directory Destroyed
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo [INFO] libprintf.a Destroyed
+	@echo [INFO] $(NAME) Destroyed
 
 re: fclean all
