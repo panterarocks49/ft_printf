@@ -15,6 +15,8 @@ RM := /bin/rm -f
 
 FLAGS := -Wall -Wextra -Werror
 INCLUDE := -I ./include/
+SRC_DIR := ./src/
+OBJ_DIR := ./obj/
 
 PRF_UTIL := buffer pf_itoa pf_uitoa_base pf_ftoa
 PRF_HND := char str ptr percent int uint float wildcard int_ptr
@@ -35,31 +37,47 @@ LFT_LST := ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap ft_ls
 LFT_READ := get_next_line
 LFT_MATH := ft_pow
 
-FILES := $(LFT_MEM) $(LFT_STR) $(LFT_CHAR) $(LFT_WCHAR) $(LFT_PUT) $(LFT_LST) $(LFT_READ) $(LFT_MATH) $(LFT_PRF)
-
 FUNCTS := $(patsubst %, mem/%, $(LFT_MEM)) $(patsubst %, str/%, $(LFT_STR)) \
 $(patsubst %, char/%, $(LFT_CHAR)) $(patsubst %, wchar/%, $(LFT_WCHAR)) $(patsubst %, put/%, $(LFT_PUT)) \
 $(patsubst %, list/%, $(LFT_LST)) $(patsubst %, read/%, $(LFT_READ)) $(patsubst %, math/%, $(LFT_MATH)) \
 $(patsubst %, ft_printf/%, $(PRF_FUNCTS))
 
-CFILES := $(patsubst %, ./src/%.c, $(FUNCTS))
-OFILES := $(patsubst %, %.o, $(FILES))
+CFILES := $(patsubst %, $(SRC_DIR)%.c, $(FUNCTS))
+OFILES := $(patsubst %, $(OBJ_DIR)%.o, $(FUNCTS))
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(OFILES):
-	gcc $(FLAGS) $(INCLUDE) -c $(CFILES)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)mem
+	@mkdir -p $(OBJ_DIR)str
+	@mkdir -p $(OBJ_DIR)char
+	@mkdir -p $(OBJ_DIR)wchar
+	@mkdir -p $(OBJ_DIR)put
+	@mkdir -p $(OBJ_DIR)list
+	@mkdir -p $(OBJ_DIR)read
+	@mkdir -p $(OBJ_DIR)math
+	@mkdir -p $(OBJ_DIR)ft_printf/handlers
+	@mkdir -p $(OBJ_DIR)ft_printf/util
+	@echo [INFO] Object Files Directory Created
 
-$(NAME): $(OFILES)
-	ar rc $(NAME) $(OFILES)
-	ranlib $(NAME)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
+
+$(NAME): $(OBJ_DIR) $(OFILES)
+	@ar rc $(NAME) $(OFILES)
+	@echo [INFO] libprintf.a Created
+	@ranlib $(NAME)
+	@echo [INFO] ranlib $(NAME)
+
 
 clean:
-	@$(RM) $(OFILES)
+	@rm -rf $(OBJ_DIR)
+	@echo [INFO] Object Files Directory Destroyed
 
 fclean: clean
 	@$(RM) $(NAME)
+	@echo [INFO] libprintf.a Destroyed
 
 re: fclean all
