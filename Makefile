@@ -6,7 +6,7 @@
 #    By: jbrown <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 15:42:35 by jbrown            #+#    #+#              #
-#    Updated: 2018/04/20 03:34:10 by jbrown           ###   ########.fr        #
+#    Updated: 2018/04/22 14:57:12 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ $(OBJ_DIR):
 	@echo [INFO] Libftprintf Object Files Directory Created
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
+	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
+	@echo [INFO] Compiling $@ -> $<
 
 $(NAME): $(OBJ_DIR) $(OFILES)
 	@ar rc $(NAME) $(OFILES)
